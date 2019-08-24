@@ -5,7 +5,7 @@ export default class src extends Component {
   state = {
     startList: [],
     pages: 20,
-    pagesLimit: 5,
+    pagesLimit: 10,
     indexStart: 0,
     indexEnd: this.pagesLimit,
     list: [],
@@ -13,7 +13,8 @@ export default class src extends Component {
   };
 
   componentDidMount() {
-    const startList = [...Array(this.state.pages + 1).keys()].slice(1);
+    const pages = 50;
+    const startList = [...Array(pages + 1).keys()].slice(1);
 
     const pagesLimit = 5;
     const indexStart = 0;
@@ -21,10 +22,12 @@ export default class src extends Component {
 
     this.setState({
       ...this.state,
+      pages: pages,
       list: startList,
       listLimit: startList.slice(indexStart, indexEnd),
       startList: startList,
-      indexEnd: indexEnd
+      indexEnd: indexEnd,
+      pagesLimit: pagesLimit
     });
   }
 
