@@ -9,7 +9,8 @@ export default class src extends Component {
     indexStart: 0,
     indexEnd: this.pagesLimit,
     list: [],
-    listLimit: []
+    listLimit: [],
+    currentPage: 0
   };
 
   componentDidMount() {
@@ -20,14 +21,28 @@ export default class src extends Component {
     const indexStart = 0;
     const indexEnd = pagesLimit;
 
+    const listLimit = startList.slice(indexStart, indexEnd);
+
     this.setState({
       ...this.state,
       pages: pages,
       list: startList,
-      listLimit: startList.slice(indexStart, indexEnd),
+      listLimit: listLimit,
       startList: startList,
       indexEnd: indexEnd,
-      pagesLimit: pagesLimit
+      pagesLimit: pagesLimit,
+      currentPage: 1
+    });
+  }
+
+  handleCurrentPageUpdate() {
+    const currentPage = this.state.listLimit[
+      Math.floor(this.state.listLimit.length / 2)
+    ];
+
+    this.setState({
+      ...this.state,
+      currentPage: currentPage
     });
   }
 
@@ -59,6 +74,13 @@ export default class src extends Component {
     });
   }
 
+  handleOnPageChange(pageNumber, e) {
+    this.setState({
+      ...this.state,
+      currentPage: pageNumber
+    });
+  }
+
   render() {
     return (
       <div>
@@ -81,7 +103,12 @@ export default class src extends Component {
 
           {this.state.listLimit.map(i => (
             <PaginationItem key={i}>
-              <PaginationLink href="#">{i}</PaginationLink>
+              <PaginationLink
+                onClick={event => this.handleOnPageChange(event.target.text)}
+                href="#"
+              >
+                {i}
+              </PaginationLink>
             </PaginationItem>
           ))}
 
@@ -101,6 +128,7 @@ export default class src extends Component {
             <PaginationLink last href="#" />
           </PaginationItem>
         </Pagination>
+        <p> Current page = {this.state.currentPage}</p>
       </div>
     );
   }
