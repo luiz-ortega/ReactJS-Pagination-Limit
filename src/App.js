@@ -1,6 +1,6 @@
 import React from "react";
 import Pagination from "./Pagination";
-import Pagination2 from "./Pagination2";
+// import Pagination2 from "./Pagination2";
 
 function App() {
   return (

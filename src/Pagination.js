@@ -2,20 +2,20 @@ import React, { Component } from "react";
 import { Pagination, PaginationItem, PaginationLink } from "reactstrap";
 
 export default class src extends Component {
-  constructor() {
-    super();
+  // constructor() {
+  //   super();
 
-    this.state = {
-      startList: [],
-      pages: 20,
-      pagesLimit: 10,
-      indexStart: 0,
-      indexEnd: this.pagesLimit,
-      list: [],
-      listLimit: [],
-      currentPage: 0
-    };
-  }
+  state = {
+    startList: [],
+    pages: 20,
+    pagesLimit: 10,
+    indexStart: 0,
+    indexEnd: this.pagesLimit,
+    list: [],
+    listLimit: [],
+    currentPage: 0
+  };
+  // }
 
   componentDidMount() {
     const pages = 53;
@@ -82,8 +82,8 @@ export default class src extends Component {
   }
 
   handleOnPageChange(event, i) {
-    console.log(i);
-    event.preventDefault();
+    // console.log(i);
+    // event.preventDefault();
     this.setState({
       ...this.state,
       // currentPage: event.target.text
