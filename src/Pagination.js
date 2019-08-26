@@ -14,7 +14,7 @@ export default class src extends Component {
   };
 
   componentDidMount() {
-    const pages = 23;
+    const pages = 53;
     const startList = [...Array(pages + 1).keys()].slice(1);
 
     const pagesLimit = 5;
