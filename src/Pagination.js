@@ -2,16 +2,20 @@ import React, { Component } from "react";
 import { Pagination, PaginationItem, PaginationLink } from "reactstrap";
 
 export default class src extends Component {
-  state = {
-    startList: [],
-    pages: 20,
-    pagesLimit: 10,
-    indexStart: 0,
-    indexEnd: this.pagesLimit,
-    list: [],
-    listLimit: [],
-    currentPage: 0
-  };
+  constructor() {
+    super();
+
+    this.state = {
+      startList: [],
+      pages: 20,
+      pagesLimit: 10,
+      indexStart: 0,
+      indexEnd: this.pagesLimit,
+      list: [],
+      listLimit: [],
+      currentPage: 0
+    };
+  }
 
   componentDidMount() {
     const pages = 53;
@@ -77,14 +81,18 @@ export default class src extends Component {
     });
   }
 
-  handleOnPageChange(pageNumber, e) {
+  handleOnPageChange(event, i) {
+    console.log(i);
+    event.preventDefault();
     this.setState({
       ...this.state,
-      currentPage: pageNumber
+      // currentPage: event.target.text
+      currentPage: i
     });
   }
 
   render() {
+    const { currentPage } = this.state;
     return (
       <div>
         <Pagination aria-label="Page navigation example">
@@ -105,9 +113,9 @@ export default class src extends Component {
           )}
 
           {this.state.listLimit.map(i => (
-            <PaginationItem key={i}>
+            <PaginationItem active={i === currentPage} key={i}>
               <PaginationLink
-                onClick={event => this.handleOnPageChange(event.target.text)}
+                onClick={event => this.handleOnPageChange(event, i)}
                 href="#"
               >
                 {i}
