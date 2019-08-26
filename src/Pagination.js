@@ -14,7 +14,7 @@ export default class src extends Component {
   };
 
   componentDidMount() {
-    const pages = 50;
+    const pages = 23;
     const startList = [...Array(pages + 1).keys()].slice(1);
 
     const pagesLimit = 5;
@@ -56,6 +56,9 @@ export default class src extends Component {
       ...this.state,
       indexStart: this.state.indexStart + this.state.pagesLimit,
       indexEnd: this.state.indexEnd + this.state.pagesLimit,
+      // this.state.pagesLimit.lenght + 1 <= this.state.pages
+      //   ? this.state.indexEnd + this.state.pagesLimit
+      //   : this.state.indexEnd + this.state.pagesLimit,
       listLimit: listLimitUpdate
     });
   }
@@ -112,7 +115,7 @@ export default class src extends Component {
             </PaginationItem>
           ))}
 
-          {this.state.indexEnd === this.state.pages ? null : (
+          {this.state.indexEnd >= this.state.pages ? null : (
             <PaginationItem>
               <PaginationLink onClick={() => this.handleNext()}>
                 {" "}
@@ -129,6 +132,9 @@ export default class src extends Component {
           </PaginationItem>
         </Pagination>
         <p> Current page = {this.state.currentPage}</p>
+
+        {/* <p>{this.state.indexEnd}</p>
+        <p>{this.state.pages}</p> */}
       </div>
     );
   }
